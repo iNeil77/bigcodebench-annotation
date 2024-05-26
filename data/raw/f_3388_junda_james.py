@@ -78,6 +78,8 @@ class TestCases(unittest.TestCase):
         os.remove(self.dummy_image_path)
         os.remove(self.dummy_image_path_zero)
         os.remove(self.dummy_image_path_max)
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
 
     def test_histogram_output(self):
         histogram = f_3388(self.dummy_image_path)

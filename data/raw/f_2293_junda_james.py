@@ -75,11 +75,16 @@ import unittest
 from datetime import datetime
 import pytz
 import pandas as pd
+import os
 
 class TestCases(unittest.TestCase):
     def setUp(self):
         self.seed = 42
         self.utc_time = datetime(2023, 6, 15, 12, tzinfo=pytz.UTC)
+
+    def tearDown(self) -> None:
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
 
     def test_valid_input(self):
         """Test with default parameters and check DataFrame structure."""

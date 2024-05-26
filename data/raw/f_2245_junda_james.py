@@ -51,8 +51,13 @@ import unittest
 import numpy as np
 import pandas as pd
 import folium
+import os
 
 class TestCases(unittest.TestCase):
+    def tearDown(self):
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
+
     def test_default_parameters(self):
         np.random.seed(42)
         map_obj, city_data = f_2245()

@@ -104,6 +104,8 @@ class TestCases(unittest.TestCase):
 
     def tearDown(self):
         os.remove('test_image.jpg')
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
         for i in range(1, 4):
             if os.path.exists(f'cluster_{i}.jpg'):
                 os.remove(f'cluster_{i}.jpg')

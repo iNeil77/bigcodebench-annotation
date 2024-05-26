@@ -49,6 +49,7 @@ def f_1780(df, cols):
 import unittest
 import numpy as np
 import pandas as pd 
+import os
 
 class TestCases(unittest.TestCase):
     def setUp(self):
@@ -58,6 +59,10 @@ class TestCases(unittest.TestCase):
             'B': np.random.exponential(1, 1000), 
             'C': np.random.randint(0, 100, 1000)
         })
+
+    def tearDown(self) -> None:
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
 
     def test_standardized_columns(self):
         standardized_df = f_1780(self.df, ['A', 'B'])

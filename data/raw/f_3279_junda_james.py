@@ -55,6 +55,8 @@ class TestCases(unittest.TestCase):
 
     def tearDown(self):
         os.remove('test_image.jpg')
+        if os.path.exists('filename'):
+            os.remove('filename')
 
     def test_normal_functionality(self):
         img, contours = f_3279('test_image.jpg')

@@ -58,6 +58,8 @@ class TestCases(unittest.TestCase):
 
     def tearDown(cls):
         os.remove('test_image.jpg')
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
 
     def test_normal_functionality(self):
         original, processed = f_3278('test_image.jpg')

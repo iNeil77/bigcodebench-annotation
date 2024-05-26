@@ -69,6 +69,9 @@ import io
 import sys
 
 class TestCases(unittest.TestCase):
+    def tearDown(self) -> None:
+        if os.path.exists('libc.so.6'):
+            os.remove('libc.so.6')
 
     @patch('ctypes.CDLL', autospec=True)
     @patch('os.path.exists', return_value=True)

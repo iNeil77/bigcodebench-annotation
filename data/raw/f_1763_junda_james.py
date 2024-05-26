@@ -55,8 +55,13 @@ def f_1763(animals=None, seed=42):
 
 import unittest
 import pandas as pd
+import os
 
 class TestCases(unittest.TestCase):
+    def tearDown(self) -> None:
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
+
     def test_default_animals(self):
         report = f_1763()
         

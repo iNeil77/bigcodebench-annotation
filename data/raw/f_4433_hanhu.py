@@ -111,6 +111,8 @@ class TestCases(unittest.TestCase):
     def tearDown(self):
         os.remove(self.filepath)
         sys.stdout = self.original_stdout
+        if os.path.exists('libc.so.6'):
+            os.remove('libc.so.6')
 
 
 

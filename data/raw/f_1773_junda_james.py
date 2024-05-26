@@ -51,16 +51,20 @@ import unittest
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 class TestCases(unittest.TestCase):
     def setUp(self):
         np.random.seed(42)
 
+    def tearDown(self):
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
+
     def test_return_type(self):
         df = pd.DataFrame(np.random.randint(0, 100, size=(100, 4)), columns=list('ABCD'))
         _, ax = f_1773(df)
         self.assertIsInstance(ax, plt.Axes)
-        
     
     def test_normalized_dataframe_structure(self):
         np.random.seed(42)

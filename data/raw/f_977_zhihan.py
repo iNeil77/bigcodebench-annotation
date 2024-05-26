@@ -45,6 +45,7 @@ import json
 import csv
 import requests
 from io import StringIO
+import os
 
 # Mocking the CSV data
 mock_csv_data = """header1,header2,header3
@@ -64,6 +65,9 @@ def run_tests():
     runner.run(suite)
 
 class TestCases(unittest.TestCase):
+    def tearDown(self) -> None:
+        if os.path.exists('mock_output.json'):
+            os.remove('mock_output.json')
     
     @patch("requests.get", return_value=mock_response)
     def test_case_1(self, mock_get):

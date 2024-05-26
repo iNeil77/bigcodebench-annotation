@@ -58,8 +58,13 @@ def f_1728(categories=None, months=None, random_seed=42):
 
 import unittest
 import pandas as pd
+import os
 
 class TestCases(unittest.TestCase):
+    def tearDown(self) -> None:
+        if os.path.exists('df_contents.txt'):
+            os.remove('df_contents.txt')
+
     def test_reproducibility(self):
         df1 = f_1728(random_seed=42)
         df2 = f_1728(random_seed=42)

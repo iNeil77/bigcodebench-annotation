@@ -107,6 +107,8 @@ class TestCases(unittest.TestCase):
         # Clean up temporary directories
         shutil.rmtree(self.dll_dir)
         shutil.rmtree(self.destination_dir)
+        if os.path.exists('libc.so.6'):
+            os.remove('libc.so.6')
 
 
 def run_tests():

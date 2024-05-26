@@ -1,6 +1,6 @@
 import re
+import nltk
 from collections import Counter
-from nltk.corpus import stopwords
 
 
 def f_292(text: str) -> dict:
@@ -16,6 +16,7 @@ def f_292(text: str) -> dict:
     Requirements:
     - re
     - collections.Counter
+    - nltk
     
     Example:
     >>> count = f_292("This is a sample text. Some words are repeated.")
@@ -23,7 +24,8 @@ def f_292(text: str) -> dict:
     {'sample': 1, 'text': 1, 'words': 1, 'repeated': 1}
     """
     words = re.findall(r'\b\w+\b', text)
-    non_stopwords = [word for word in words if word.lower() not in set(stopwords.words('english'))]
+    stopwords = set(nltk.corpus.stopwords.words('english'))
+    non_stopwords = [word for word in words if word.lower() not in stopwords]
     count = dict(Counter(non_stopwords))
 
     return count
@@ -31,6 +33,11 @@ def f_292(text: str) -> dict:
 
 import unittest
 import doctest
+import tempfile
+
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
+nltk.download('stopwords', download_dir=temp_dir)
 
 
 class TestCases(unittest.TestCase):

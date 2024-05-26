@@ -1,16 +1,13 @@
-
-import nltk
-nltk.download('stopwords')
-from collections import Counter
 import os
-from nltk.corpus import stopwords
+import tempfile
+import nltk
+from collections import Counter
 
-# Constants
-STOPWORDS = set(stopwords.words('english'))
 
 def f_272(directory_path):
     """
-    Count the number of unique non-stop words across all '.txt' files in a specified directory.
+    Count the number of unique non-stop words across all '.txt' files in a specified directory. Download the 
+    NLTK stopwords corpus to a temporary directory to access the stopwords.
 
     Parameters:
     directory_path (str): The path to the directory containing '.txt' files.
@@ -21,13 +18,17 @@ def f_272(directory_path):
     Requirements:
     - collections.Counter
     - os
+    - tempfile
     - nltk.corpus.stopwords
 
     Example:
     >>> f_272('./yourdictfiles/')
     1500
     """
-
+    temp_dir = tempfile.mkdtemp()
+    nltk.data.path.append(temp_dir)
+    nltk.download('stopwords', download_dir=temp_dir)
+    STOPWORDS = set(nltk.corpus.stopwords.words('english'))
     word_counts = Counter()
 
     for file_name in os.listdir(directory_path):

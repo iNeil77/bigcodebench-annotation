@@ -1,21 +1,15 @@
 import re
-import nltk
-nltk.download('stopwords')
-
-from nltk.corpus import stopwords
-
 from collections import Counter
 
-# Constants
-STOPWORDS = set(stopwords.words('english'))
 
-def f_676(text, n=2):
+def f_676(text, stopwords, n=2):
     """
-    Remove duplicate and stopwords from a string "text."
+    Remove duplicate and stopwords from a string "text" and a set of stopwords.
     Then, generate a count of n-grams (default is bigrams) in the text.
 
     Parameters:
     - text (str): The text string to analyze.
+    - stopwords (set): A set of stopwords to exclude from the n-grams.
     - n (int): The size of the n-grams.
 
     Returns:
@@ -23,7 +17,6 @@ def f_676(text, n=2):
 
     Requirements:
     - re
-    - nltk.corpus.stopwords
     - collections.Counter
 
     Example:
@@ -37,7 +30,7 @@ def f_676(text, n=2):
     text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
 
     # Filter out stopwords and split into words
-    words = [word.lower() for word in text.split() if word.lower() not in STOPWORDS]
+    words = [word.lower() for word in text.split() if word.lower() not in stopwords]
 
     # Generate n-grams
     ngrams = zip(*[words[i:] for i in range(n)])
@@ -46,7 +39,15 @@ def f_676(text, n=2):
 
 import unittest
 from collections import Counter
-import string
+import nltk
+import tempfile
+
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
+nltk.download('stopwords', download_dir=temp_dir)
+
+# Constants
+STOPWORDS = set(nltk.corpus.stopwords.words('english'))
 
 class TestCases(unittest.TestCase):
 
@@ -57,7 +58,7 @@ class TestCases(unittest.TestCase):
         - Expected Output: A Counter object with the count of each bigram
         """
         text = "The quick brown fox jumps over the lazy dog."
-        result = f_676(text)
+        result = f_676(text, STOPWORDS)
         expected = Counter({('quick', 'brown'): 1, ('brown', 'fox'): 1, ('fox', 'jumps'): 1, ('jumps', 'lazy'): 1, ('lazy', 'dog'): 1})
         self.assertEqual(result, expected)
 
@@ -68,7 +69,7 @@ class TestCases(unittest.TestCase):
         - Expected Output: A Counter object with the count of each bigram, excluding duplicated words
         """
         text = "This is is a simple simple test test."
-        result = f_676(text)
+        result = f_676(text, STOPWORDS)
         expected = Counter({('simple', 'simple'): 1, ('simple', 'test'): 1, ('test', 'test'): 1})
         self.assertEqual(result, expected)
 
@@ -79,14 +80,14 @@ class TestCases(unittest.TestCase):
         - Expected Output: A Counter object with the count of each bigram, excluding stopwords
         """
         text = "This is a test of the function."
-        result = f_676(text)
+        result = f_676(text, STOPWORDS)
         expected = Counter({('test', 'function'): 1})
         self.assertEqual(result, expected)
 
     def test_case_4(self):
         # This test involves punctuation; ensure punctuation handling is consistent with function logic
         text = "Hello, world!"
-        result = f_676(text)
+        result = f_676(text, STOPWORDS)
         expected = Counter({
             ('hello', 'world'): 1
         })
@@ -99,7 +100,7 @@ class TestCases(unittest.TestCase):
         - Expected Output: An empty Counter object
         """
         text = ""
-        result = f_676(text)
+        result = f_676(text, STOPWORDS)
         expected = Counter()
         self.assertEqual(result, expected)
 

@@ -54,8 +54,12 @@ def f_220(df):
 import unittest
 import pandas as pd
 import nltk
+import tempfile
 
-nltk.download('punkt')  # Ensure the NLTK tokenizer is available
+# Ensure the NLTK tokenizer is available in a temporary directory
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
+nltk.download('punkt', download_dir=temp_dir) 
 
 
 def run_tests():

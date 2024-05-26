@@ -33,6 +33,12 @@ def f_698(input_string):
 
 
 import unittest
+import nltk
+import tempfile
+
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
+nltk.download('stopwords', download_dir=temp_dir)
 
 class TestCases(unittest.TestCase):
 

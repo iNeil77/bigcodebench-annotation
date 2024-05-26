@@ -3,7 +3,6 @@ import string
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-nltk.download('vader_lexicon')
 # Constants
 ALPHANUMERIC = re.compile('[\W_]+')
 PUNCTUATIONS = string.punctuation
@@ -45,6 +44,11 @@ def f_517(text: str, sia: SentimentIntensityAnalyzer) -> dict:
     return sentiment_scores
 
 import unittest
+import tempfile
+
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
+nltk.download('vader_lexicon', download_dir=temp_dir)
 
 
 # Mock the SentimentIntensityAnalyzer for our tests

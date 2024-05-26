@@ -1,9 +1,14 @@
 import re
+import tempfile
 import nltk
+from textblob import TextBlob
+
+temp_dir = tempfile.mkdtemp()
+nltk.data.path.append(temp_dir)
 nltk.download('stopwords')
 
 from nltk.corpus import stopwords
-from textblob import TextBlob
+
 
 # Constants
 STOPWORDS = set(stopwords.words('english'))
@@ -12,6 +17,8 @@ def f_677(text):
     """
     Remove duplicate and stopwords from a string "text."
     Then, analyze the sentiment of the text using TextBlob.
+    Use nltk.corpus.stopwords to remove stopwords from the text
+    by downloading the stopwords list to a temporary directory.
 
     Parameters:
     - text (str): The text string to analyze.
@@ -21,6 +28,7 @@ def f_677(text):
 
     Requirements:
     - re
+    - tempfile
     - nltk.corpus.stopwords
     - textblob.TextBlob
 

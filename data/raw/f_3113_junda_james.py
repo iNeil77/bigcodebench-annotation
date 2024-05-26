@@ -125,6 +125,8 @@ class TestCases(unittest.TestCase):
                 os.remove(file_path)
         if os.path.exists(self.test_data_dir):
             os.rmdir(self.test_data_dir)
+        if os.path.exists('empty_test_data'):
+            os.rmdir('empty_test_data')
 
     def test_normal_functionality(self):
         os.remove(self.test_data_dir + 'empty.csv')

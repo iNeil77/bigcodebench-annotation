@@ -39,6 +39,7 @@ import unittest
 import os
 import random
 import string
+import shutil
 
 # Importing the refined function
 
@@ -51,9 +52,7 @@ class TestCases(unittest.TestCase):
 
     def tearDown(self):
         # Remove all files in the test directory after each test
-        for file_name in os.listdir(self.test_dir):
-            file_path = os.path.join(self.test_dir, file_name)
-            os.remove(file_path)
+        shutil.rmtree(self.test_dir)
 
     def test_single_line(self):
         # Test with a single line string

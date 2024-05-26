@@ -60,6 +60,8 @@ class TestCases(unittest.TestCase):
     def tearDown(self):
         os.remove(self.index_html_path)
         os.rmdir(self.template_folder)
+        if os.path.exists('out.log'):
+            os.remove('out.log')
 
     def test_app_creation(self):
         """Test if the function properly creates an app with given parameters."""

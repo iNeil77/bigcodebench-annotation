@@ -80,6 +80,7 @@ class TestCases(unittest.TestCase):
     def tearDown(self):
         # Clean up the test directory
         shutil.rmtree(self.test_dir)
+        shutil.rmtree(self.temp_dir)
     
     @patch('subprocess.call', return_value=None)
     def test_case_1(self, mock_subprocess):

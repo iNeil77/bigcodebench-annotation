@@ -33,9 +33,9 @@ def f_2505(image_path, kernel_size):
         raise ValueError("kernel_size must be a positive integer")
     
     try:
-        image = cv2.imread(image_path)
+        image = cv2.imread(str(image_path))
         if image is None:
-            raise FileNotFoundError(f"No image found at {image_path}")
+            raise FileNotFoundError(f"No image found at {str(image_path)}")
     except FileNotFoundError as e:
         raise e
 

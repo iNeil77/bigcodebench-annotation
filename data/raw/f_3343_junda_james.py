@@ -53,11 +53,11 @@ def f_3343(image_path='image.jpg', n_clusters=3, random_seed=42):
     if not isinstance(n_clusters, int) or n_clusters <= 0:
         raise ValueError("n_clusters must be a positive integer.")
 
-    if not os.path.exists(image_path):
-        raise FileNotFoundError(f"No image found at {image_path}")
+    if not os.path.exists(str(image_path)):
+        raise FileNotFoundError(f"No image found at {str(image_path)}")
 
     # Image processing
-    img = cv2.imread(image_path)
+    img = cv2.imread(str(image_path))
     if img is None:
         raise ValueError("Failed to read the image file.")
     if n_clusters == 1:

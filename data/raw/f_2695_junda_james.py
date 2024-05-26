@@ -38,10 +38,10 @@ def f_2695(file_path, onpick):
     >>> ax = f_2695('image.jpg', onpick)
     >>> os.remove(dummy_img_path)
     """
-    if not os.path.exists(file_path):
-        raise FileNotFoundError(f"No file found at {file_path}")
+    if not os.path.exists(str(file_path)):
+        raise FileNotFoundError(f"No file found at {str(file_path)}")
 
-    img = cv2.imread(file_path)
+    img = cv2.imread(str(file_path))
     color = ('b', 'g', 'r')
     fig = plt.figure()
     ax = Axes3D(fig)

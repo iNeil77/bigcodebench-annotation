@@ -26,10 +26,10 @@ def f_3279(img_path):
     >>> img, contours = f_3279(img_path)
     >>> os.remove(img_path)
     """
-    if not os.path.exists(img_path):
-        raise FileNotFoundError(f"No file found at {img_path}")
+    if not os.path.exists(str(img_path)):
+        raise FileNotFoundError(f"No file found at {str(img_path)}")
     
-    img = cv2.imread(img_path)
+    img = cv2.imread(str(img_path))
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     
     # Find contours

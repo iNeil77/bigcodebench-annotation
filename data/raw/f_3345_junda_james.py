@@ -33,10 +33,10 @@ def f_3345(image_path='image.jpg', histogram_path='histogram.png'):
     'Grayscale Histogram'
     """
 
-    if not os.path.exists(image_path):
-        raise FileNotFoundError(f"No image found at {image_path}")
+    if not os.path.exists(str(image_path)):
+        raise FileNotFoundError(f"No image found at {str(image_path)}")
 
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
     hist = cv2.calcHist([img], [0], None, [256], [0, 256])
 
     plt.figure()
